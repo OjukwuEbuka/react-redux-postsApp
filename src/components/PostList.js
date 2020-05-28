@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import {postsFetch} from '../actions';
+import {postsFetch, postsAndUserFetch} from '../actions';
 import Post from './Post';
 
 
 
 class PostList extends Component {
     componentDidMount(){
-        this.props.postsFetch();
+        this.props.postsAndUserFetch();
     }
-    render(){        
+    render(){
         return <ul>
             {this.props.posts.map(post => <Post key={post.id} post={post} />)}
         </ul>
@@ -18,7 +18,7 @@ class PostList extends Component {
 }
 
 const mapStateToProps = state => {
-    return {posts: state.posts}
+    return {posts: state.posts.posts, userId: state.posts.userIds}
 }
 
-export default connect(mapStateToProps, {postsFetch})(PostList);
+export default connect(mapStateToProps, {postsAndUserFetch})(PostList);
